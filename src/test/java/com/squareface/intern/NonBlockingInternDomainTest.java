@@ -58,6 +58,40 @@ public class NonBlockingInternDomainTest {
         }
     }
 
+    private static class TestObjectSub extends InternDomainTestUtil.TestObject {
+
+        private String additionalInfo;
+
+        public TestObjectSub(int currentCount, String additionalInfo) {
+            super(currentCount);
+        }
+
+        public String getAdditionalInfo() {
+            return additionalInfo;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+
+            TestObjectSub that = (TestObjectSub) o;
+
+            if (additionalInfo != null ? !additionalInfo.equals(that.additionalInfo) : that.additionalInfo != null)
+                return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = super.hashCode();
+            result = 31 * result + (additionalInfo != null ? additionalInfo.hashCode() : 0);
+            return result;
+        }
+    }
+
     @Test
     public void testIntern() throws Exception {
 
@@ -75,6 +109,19 @@ public class NonBlockingInternDomainTest {
         // Another identity equals, expect InternDomain to return same instance as base
         Assert.assertTrue("InternDomain did not return previously interned instance", internedSecond == base);
 
+    }
+
+    @Test
+    public void testInterningSubclass() {
+        NonBlockingInternDomain<InternDomainTestUtil.TestObject> internDomain = new NonBlockingInternDomain<>();
+
+        TestObjectSub first = new TestObjectSub(5, "underhill");
+        TestObjectSub second = new TestObjectSub(5, "underhill");
+
+        InternDomainTestUtil.TestObject firstInterned = internDomain.intern(first);
+        InternDomainTestUtil.TestObject secondInterned = internDomain.intern(second);
+
+        Assert.assertTrue("InternDomain did not return previously interned instance", firstInterned == secondInterned);
     }
 
     @Test
