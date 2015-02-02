@@ -46,7 +46,7 @@ public class BasicValues<E> implements Values<E> {
     }
 
     @Override
-    public BasicValues<E> toBasicValues() {
+    public BasicValues<E> asBasicValues() {
         return this;
     }
 }

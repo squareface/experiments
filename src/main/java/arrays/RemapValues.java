@@ -57,7 +57,7 @@ public class RemapValues<E> implements Values<E> {
     }
 
     @Override
-    public BasicValues<E> toBasicValues() {
+    public BasicValues<E> asBasicValues() {
         return new BasicValues<>(toArray());
     }
 }

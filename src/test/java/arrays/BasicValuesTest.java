@@ -61,7 +61,7 @@ public class BasicValuesTest {
     @Test
     public void testConvertsToBasicValues() {
         Values<String> v = getValues();
-        Values<String> basic = v.toBasicValues();
+        Values<String> basic = v.asBasicValues();
         Assert.assertEquals(6, basic.size());
         Assert.assertEquals("abc", basic.getFirst());
         Assert.assertEquals("pqr", basic.getLast());

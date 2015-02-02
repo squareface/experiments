@@ -73,7 +73,7 @@ public class OffsetValuesTest {
     @Test
     public void testConvertsToBasicValues() {
         Values<String> v = getValues();
-        Values<String> basic = v.toBasicValues();
+        Values<String> basic = v.asBasicValues();
         Assert.assertEquals(4, basic.size());
         Assert.assertEquals("ghi", basic.getFirst());
         Assert.assertEquals("pqr", basic.getLast());

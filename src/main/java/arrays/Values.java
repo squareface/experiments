@@ -18,6 +18,6 @@ public interface Values<E> extends Iterable<E> {
 
     E[] toArray();
 
-    BasicValues<E> toBasicValues();
+    BasicValues<E> asBasicValues();
 
 }
