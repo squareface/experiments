@@ -1,5 +1,6 @@
 package com.squareface.intern;
 
+import com.google.common.base.Preconditions;
 import org.cliffc.high_scale_lib.NonBlockingHashMap;
 
 import java.lang.ref.Reference;
@@ -90,6 +91,8 @@ public class NonBlockingInternDomain<T> implements InternDomain<T> {
 
 
     public T intern(T object) {
+
+        Preconditions.checkNotNull(object);
 
         // Test existence in the map using a key that doesn't register
         // with the ReferenceQueue
